@@ -12,7 +12,7 @@ def process(csvfile):
     with open(csvfile, 'r') as f:
         for i, row in enumerate(f):
             if i == 0:
-                print(row[:-1] + ',ripemd')
+                print(f'{row[:-1]},ripemd')
                 continue
             elif row.strip() == '':
                 break
@@ -23,7 +23,7 @@ def process(csvfile):
             else:
                 ripemd_bin = tocondensed(row.split(',')[0])
                 ripemd_encoded = binascii.hexlify(ripemd_bin)
-            print(row[: -1] + ',' + ripemd_encoded.decode())
+            print(f'{row[:-1]},{ripemd_encoded.decode()}')
 
 
 def input_args():
@@ -37,8 +37,7 @@ def input_args():
         help='path to csv file with btc address in first column (usually output of btcposbal2csv)'
     )
 
-    a = parser.parse_args()
-    return a
+    return parser.parse_args()
 
 
 if __name__ == '__main__':
